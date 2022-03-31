@@ -1,15 +1,43 @@
-package paper_stone_scissors;
+package pl.marcinycz.paper_stone_scissors;
 
+import lombok.*;
+
+import javax.persistence.*;
 import java.util.Random;
 import java.util.Scanner;
 
+@Entity
+@Table(name = "pss")
+@Getter
+@Setter
+@AllArgsConstructor
+//@RequiredArgsConstructor
+@ToString
+@NoArgsConstructor
 public class Pss {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+
+    @NonNull
+    private int myChoiceInt;
+
 
     private String computerChoice;
     private String myChoice;
     private int score;
-    private int totalscore;
     private String verdict;
+
+    private int totalScore;
+
+
+    public void startPss(int totalScore){
+        this.totalScore = totalScore;
+        judge(this.myChoiceInt);
+        this.verdict = result(this.score);
+        this.totalScore += this.score;
+    }
+
 
     public int getScore() {
         return score;
@@ -24,7 +52,7 @@ public class Pss {
 
             int choice = scanner.nextInt();
             if(choice == 9){
-                System.out.println("Mój wynik: " + (this.totalscore += this.score));
+                System.out.println("Mój wynik: " + (this.totalScore += this.score));
                 System.out.println("DZIĘKI ZA GRĘ ;)");
                 break;
             }
@@ -33,7 +61,7 @@ public class Pss {
             System.out.println("Komputer: " + computerChoice);
             this.verdict = result(score);
             System.out.println(verdict);
-            System.out.println("Mój wynik: " + (this.totalscore += this.score));
+            System.out.println("Mój wynik: " + (this.totalScore += this.score));
         }
     }
 

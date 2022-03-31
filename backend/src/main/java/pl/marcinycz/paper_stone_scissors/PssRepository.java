@@ -1,4 +1,4 @@
-package paper_stone_scissors;
+package pl.marcinycz.paper_stone_scissors;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
