@@ -11,12 +11,17 @@ class GameAlert extends Component{
             visible: this.props.visible,
             variant: this.props.variant,
             heading: this.props.heading,
-            message: this.props.message
+            message: this.props.message,
+            message1: this.props.message1
         };
     }
 
     setMessage = (message) => {
         this.setState({message: message});
+      }
+
+      setMessage1 = (message1) => {
+        this.setState({message1: message1});
       }
 
       setHeading = (heading) => {
@@ -40,6 +45,10 @@ class GameAlert extends Component{
                 <Alert.Heading>{this.state.heading}</Alert.Heading>
                  <p>
                     {this.state.message}
+                </p>
+                <hr />
+                <p>
+                    {this.state.message1}
                 </p>
             </Alert>
           </div>

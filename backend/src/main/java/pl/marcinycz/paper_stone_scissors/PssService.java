@@ -3,8 +3,6 @@ package pl.marcinycz.paper_stone_scissors;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -37,15 +35,17 @@ public class PssService {
         return ResponseEntity.ok(pss);
     }
 
-    @PostMapping("/pssDeleteStory")
-    public ResponseEntity pssDeleteStory(){
+    @CrossOrigin(origins = "http://localhost:3000/")
+    @PostMapping("/pssDeleteHitory")
+    public ResponseEntity pssDeleteHistory(){
 
         pssRepository.deleteAll();
 
-        return ResponseEntity.ok("Delete all database");
+        return ResponseEntity.ok("Deleted all database");
     }
 
     //Game story
+    @CrossOrigin(origins = "http://localhost:3000/")
     @GetMapping("/pss")
     public ResponseEntity getLastGame() throws JsonProcessingException {
         List<Pss> allGames = pssRepository.findAll();
