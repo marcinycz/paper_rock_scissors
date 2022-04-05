@@ -12,7 +12,7 @@ class GameAlert extends Component{
             variant: this.props.variant,
             heading: this.props.heading,
             message: this.props.message
-        }
+        };
     }
 
     setMessage = (message) => {
@@ -35,7 +35,7 @@ class GameAlert extends Component{
         if (this.state.visible) {
         return (
           <>
-          <div className="RegistrationAlert">
+          <div className="GameAlert">
             <Alert variant={this.state.variant} onClose={() => this.setState({visible: false})} dismissible>
                 <Alert.Heading>{this.state.heading}</Alert.Heading>
                  <p>

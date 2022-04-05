@@ -31,7 +31,7 @@ class PssGame extends Component{
         }).then(function(response){
             if (response.status === 200){
                 console.log("Add game");
-                //this.showGameAlert("succes", "Add new game");
+                this.showGameAlert("success", "Add new game", "asdsadsa");
             } else{
                 console.log("Fail add game");
                 //this.showGameAlert("dangrer", "Fail, did't add new game");
@@ -43,10 +43,10 @@ class PssGame extends Component{
     }
 
     showGameAlert(variant, heading, message) {
-        this.registrationAlert.current.setVariant(variant);
-        this.registrationAlert.current.setHeading(heading);
-        this.registrationAlert.current.setMessage(message);
-        this.registrationAlert.current.setVisible(true);
+        this.gameAlert.current.setVariant(variant);
+        this.gameAlert.current.setHeading(heading);
+        this.gameAlert.current.setMessage(message);
+        this.gameAlert.current.setVisible(true);
     }
 
   render() {
@@ -70,7 +70,7 @@ class PssGame extends Component{
         </Form>
     </div>
 
-    <GameAlert ref={this.RegistrationAlert}/>
+    <GameAlert ref={this.gameAlert}/>
     </>
     )
   } 
