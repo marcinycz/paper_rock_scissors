@@ -64,7 +64,7 @@ class PssGame extends Component{
 
     deleteHistory(){
         fetch('http://localhost:8080/pssDeleteHitory', {
-            method: 'POST',
+            method: 'DELETE',
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',

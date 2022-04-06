@@ -11,7 +11,6 @@ import java.util.Scanner;
 @Getter
 @Setter
 @AllArgsConstructor
-//@RequiredArgsConstructor
 @ToString
 @NoArgsConstructor
 public class Pss {
