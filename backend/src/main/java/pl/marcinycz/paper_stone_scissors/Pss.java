@@ -36,34 +36,7 @@ public class Pss {
         this.verdict = result(this.score);
         this.totalScore += this.score;
     }
-
-
-    public int getScore() {
-        return score;
-    }
-
-    public void startInConsole(){
-        Scanner scanner = new Scanner(System.in);
-        for(;;){
-            System.out.println();
-            System.out.println("PAPIER = 0, KAMIEN = 1, NOŻYCE = 2, PODDAJĘ SIĘ = 9");
-            System.out.print("WYBIERZ: ");
-
-            int choice = scanner.nextInt();
-            if(choice == 9){
-                System.out.println("Mój wynik: " + (this.totalScore += this.score));
-                System.out.println("DZIĘKI ZA GRĘ ;)");
-                break;
-            }
-            judge(choice);
-            System.out.println("Twój wybór: " + myChoice);
-            System.out.println("Komputer: " + computerChoice);
-            this.verdict = result(score);
-            System.out.println(verdict);
-            System.out.println("Mój wynik: " + (this.totalScore += this.score));
-        }
-    }
-
+    
     public void judge (int myChoice){
         Random random = new Random();
         int computerChoice = random.nextInt(3);
