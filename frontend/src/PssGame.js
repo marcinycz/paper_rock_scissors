@@ -89,7 +89,7 @@ class PssGame extends Component{
                     let historyMessage = ["","","","",""];
 
                     for(let i = 0; i < jsonLength; i++){
-                        historyMessage[i] = i+1 + ". " + pss[i].myChoice + " vs " + pss[i].computerChoice + " => " + pss[i].verdict + " |  SCORE: " + pss[i].score;
+                        historyMessage[i] = i+1 + ". " + pss[i].myChoice + " vs " + pss[i].computerChoice + " => " + pss[i].verdict + " |  SCORE: " + pss[i].totalScore;
                     }
 
                      this.showHistoryAlert("primary", "HISTORY",
