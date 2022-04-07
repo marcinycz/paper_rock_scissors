@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import './App.css';
-import { Form } from 'react-bootstrap';
+import { Form, ToggleButtonGroup } from 'react-bootstrap';
 import { Button } from 'react-bootstrap';
+import ToggleButton from 'react-bootstrap/ToggleButton'
 
 import './PssGame.css'
 import GameAlert from './GameAlert';
@@ -18,7 +19,7 @@ class PssGame extends Component{
 
     handleChoiceSumbit = event => {
         event.preventDefault();
-        this.sendMyChoiceInt(event.target.myChoiceInt.value);
+        this.sendMyChoiceInt(event.target.value);
     }
 
     handleDeleteSumbit = event => {
@@ -56,6 +57,7 @@ class PssGame extends Component{
                     } else{
                         this.showGameAlert("danger", pss.verdict, pss.myChoice +  " vs " + pss.computerChoice , "SCORE: " + pss.totalScore);
                     }
+                    //Show history
                     this.getLastHistory();
             })
             } else{
@@ -81,10 +83,9 @@ class PssGame extends Component{
             if (response.status === 200){
                 response.json().then((pss) => {
                     //pss.id, pss.myChoiceInt, pss.computerChoice, pss.myChoice, pss.score, pss.verdict, pss.totalScore
-                     console.log("Get last history");
+                    console.log("Get last history");
 
-                     let jsonLength = Object.keys(pss).length;
-                     console.log(jsonLength);
+                    let jsonLength = Object.keys(pss).length;
 
                     let historyMessage = ["","","","",""];
 
@@ -160,24 +161,19 @@ class PssGame extends Component{
     return (
     <>
     <div className='PssGame' >
-        <Form onSubmit = {this.handleChoiceSumbit}>
+
+        <Form >
             <Form.Group controlId='myChoiceInt' size="lg">
-                <Button size="lg" variant="primary" type="submit" name="myChoiceInt" value={0}>Paper</Button>{' '}
-            </Form.Group>
-        </Form>
-        <Form onSubmit = {this.handleChoiceSumbit}>
-            <Form.Group controlId='myChoiceInt' size="lg">
-                <Button size="lg" variant="secondary" type="submit" name="myChoiceInt" value={1}>Stone</Button>{' '}
-            </Form.Group>
-        </Form>
-        <Form onSubmit = {this.handleChoiceSumbit}>
-            <Form.Group controlId='myChoiceInt' size="lg">
-                <Button size="lg" variant="success" type="submit" name="myChoiceInt" value={2}>Scissors</Button>{' '}
+                <Button onClick={this.handleChoiceSumbit} size="lg" variant="primary" value={0}>Paper</Button>{' '}
+                <Button onClick={this.handleChoiceSumbit} size="lg" variant="secondary"   value={1}>Stone</Button>{' '}
+                <Button onClick={this.handleChoiceSumbit} size="lg" variant="success"   value={2}>Scissors</Button>{' '}
             </Form.Group>
         </Form>
 
+
         <GameAlert ref={this.gameAlert}/>
         <HistoryAlert ref={this.historyAlert}/>
+
 
         <Form onSubmit = {this.handleDeleteSumbit}>
             <Form.Group controlId='deleteHistory' size="lg">

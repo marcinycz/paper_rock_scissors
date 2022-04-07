@@ -4,7 +4,6 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.util.Random;
-import java.util.Scanner;
 
 @Entity
 @Table(name = "pss")
@@ -36,7 +35,7 @@ public class Pss {
         this.verdict = result(this.score);
         this.totalScore += this.score;
     }
-    
+
     public void judge (int myChoice){
         Random random = new Random();
         int computerChoice = random.nextInt(3);
@@ -63,7 +62,7 @@ public class Pss {
         }else if(choice == 2) {
             return "SCISSORS";
         }else{
-            return "CHEATING!!!";
+            return "WRONG CHOICE";
         }
     }
 

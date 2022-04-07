@@ -1,8 +1,13 @@
 .PssGame{
-    padding: 60px 0;
+    padding: 20px 0;
 }
 
 .PssGame Form {
-    margin: 10px auto;
-    max-width: 320px;
+    margin:  0 auto;
+    max-width: 300px;
+    padding: 10px;
+
+    
+
+
 }
