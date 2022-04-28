@@ -29,7 +29,7 @@ public class PaperStoneScissors {
     public void startPss(int totalScore){
         this.totalScore = totalScore;
         judge(this.myChoiceInt);
-        this.verdict = result(this.score);
+        this.verdict = nameTheResult(this.score);
         this.totalScore += this.score;
     }
 
@@ -63,7 +63,7 @@ public class PaperStoneScissors {
         }
     }
 
-    public String result (int point){
+    public String nameTheResult(int point){
         if(point == 0){
             return "DRAW";
         }else if(point == 1){
