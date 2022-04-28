@@ -4,6 +4,17 @@ import pl.marcinycz.paper_stone_scissors.PaperStoneScissors;
 
 public class PaperStoneScissorsTest {
     @Test
+    public void checkEnemyChoice(){
+        PaperStoneScissors paperStoneScissors = new PaperStoneScissors();
+
+        for(int i= 0; i < 1000; i++){
+            Assert.assertTrue((paperStoneScissors.enemyChoice() > -1 && paperStoneScissors.enemyChoice() < 3));
+            Assert.assertFalse(paperStoneScissors.enemyChoice() > 2);
+            Assert.assertFalse(paperStoneScissors.enemyChoice() < 0);
+        }
+    }
+
+    @Test
     public void checkJudge(){
         PaperStoneScissors paperStoneScissors = new PaperStoneScissors();
 
