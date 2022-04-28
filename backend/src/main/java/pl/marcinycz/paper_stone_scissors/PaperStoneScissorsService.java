@@ -10,10 +10,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-public class PssService {
+public class PaperStoneScissorsService {
 
     @Autowired
-    PssRepository pssRepository;
+    PaperStoneScissorsRepository pssRepository;
 
     @Autowired
     ObjectMapper objectMapper;
@@ -21,17 +21,18 @@ public class PssService {
     //Start single game
     @CrossOrigin(origins = "http://localhost:3000/")
     @PostMapping("/pss")
-    public ResponseEntity sendMyChoice(@RequestBody Pss pss){
+    public ResponseEntity sendMyChoice(@RequestBody PaperStoneScissors pss){
         int lastTotalScore = 0;
 
         if(!pssRepository.findAll().isEmpty()){
-            List<Pss> pssFromDb = pssRepository.findAll();
+            List<PaperStoneScissors> pssFromDb = pssRepository.findAll();
             lastTotalScore = pssFromDb.get(pssFromDb.size() - 1).getTotalScore();
         }
 
         pss.startPss(lastTotalScore);
 
         pssRepository.save(pss);
+
 
         return ResponseEntity.ok(pss);
     }
@@ -50,8 +51,8 @@ public class PssService {
     @CrossOrigin(origins = "http://localhost:3000/")
     @GetMapping("/pssLastGames")
     public ResponseEntity getLastGames() throws JsonProcessingException {
-        List<Pss> lastGames = new ArrayList<>();
-        List<Pss> allGames = pssRepository.findAll();
+        List<PaperStoneScissors> lastGames = new ArrayList<>();
+        List<PaperStoneScissors> allGames = pssRepository.findAll();
 
         //How long history
         int howLong = 5;
@@ -77,7 +78,8 @@ public class PssService {
     @CrossOrigin(origins = "http://localhost:3000/")
     @GetMapping("/pssAllGames")
     public ResponseEntity getAllGames() throws JsonProcessingException {
-        List<Pss> allGames = pssRepository.findAll();
+        List<PaperStoneScissors> allGames = pssRepository.findAll();
         return ResponseEntity.ok(objectMapper.writeValueAsString(allGames));
+        //return (ResponseEntity) pssRepository.getAll();
     }
 }

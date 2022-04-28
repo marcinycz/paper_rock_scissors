@@ -12,7 +12,7 @@ import java.util.Random;
 @AllArgsConstructor
 @ToString
 @NoArgsConstructor
-public class Pss {
+public class PaperStoneScissors {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -20,14 +20,11 @@ public class Pss {
     @NonNull
     private int myChoiceInt;
 
-
     private String computerChoice;
     private String myChoice;
     private int score;
     private String verdict;
-
     private int totalScore;
-
 
     public void startPss(int totalScore){
         this.totalScore = totalScore;
@@ -75,5 +72,4 @@ public class Pss {
             return "DEFEAT";
         }
     }
-
 }
