@@ -5,6 +5,8 @@ import lombok.*;
 import javax.persistence.*;
 import java.util.Random;
 
+import static pl.marcinycz.paper_stone_scissors.ChoicePSS.*;
+
 @Entity
 @Table(name = "pss")
 @Getter
@@ -37,10 +39,9 @@ public class PaperStoneScissors {
     }
 
     public int judge (int myChoice, int computerChoice){
-        //0 - PAPER, 1 - STONE, 2 - SCISSORS
         if(computerChoice == myChoice){
             return 0;
-        }else if((myChoice == 0 && computerChoice == 1) || (myChoice == 1 && computerChoice == 2) || (myChoice == 2 && computerChoice == 0)){
+        }else if((myChoice == PAPER.value && computerChoice == STONE.value) || (myChoice == STONE.value && computerChoice == SCISSORS.value) || (myChoice == SCISSORS.value && computerChoice == PAPER.value)){
             return 1;
         }else {
             return -1;
