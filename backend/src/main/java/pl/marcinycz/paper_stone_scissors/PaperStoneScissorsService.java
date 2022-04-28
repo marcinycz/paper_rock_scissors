@@ -29,7 +29,7 @@ public class PaperStoneScissorsService {
             lastTotalScore = pssFromDb.get(pssFromDb.size() - 1).getTotalScore();
         }
 
-        pss.startPss(lastTotalScore);
+        pss.startPaperStoneScissorsGame(lastTotalScore);
 
         pssRepository.save(pss);
 

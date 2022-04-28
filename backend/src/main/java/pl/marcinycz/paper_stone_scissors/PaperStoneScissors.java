@@ -26,29 +26,30 @@ public class PaperStoneScissors {
     private String verdict;
     private int totalScore;
 
-    public void startPss(int totalScore){
+    public void startPaperStoneScissorsGame(int totalScore){
         this.totalScore = totalScore;
-        judge(this.myChoiceInt);
+        int enemyChoice = enemyChoice();
+        this.computerChoice = choiceName(enemyChoice);
+        this.myChoice = choiceName(this.myChoiceInt);
+        this.score = judge(this.myChoiceInt, enemyChoice);
         this.verdict = nameTheResult(this.score);
         this.totalScore += this.score;
     }
 
-    public void judge (int myChoice){
-        Random random = new Random();
-        int computerChoice = random.nextInt(3);
-
-        this.myChoice = choiceName(myChoice);
-        this.computerChoice = choiceName(computerChoice);
-
-
-        //Paper - 0, stone - 1, scissors - 2
+    public int judge (int myChoice, int computerChoice){
+        //0 - PAPER, 1 - STONE, 2 - SCISSORS
         if(computerChoice == myChoice){
-            this.score = 0;
+            return 0;
         }else if((myChoice == 0 && computerChoice == 1) || (myChoice == 1 && computerChoice == 2) || (myChoice == 2 && computerChoice == 0)){
-            this.score = 1;
+            return 1;
         }else {
-            this.score = -1;
+            return -1;
         }
+    }
+
+    public int enemyChoice(){
+        Random random = new Random();
+        return random.nextInt(3);
     }
 
     public String choiceName (int choice){
