@@ -1,4 +1,4 @@
-# paper_stone_scissors
+Paper-stone-scissors game
 
 ![1](https://user-images.githubusercontent.com/79772379/168286584-c3f197dc-1259-49ea-9d4f-c454386a1e9b.jpg)
 
