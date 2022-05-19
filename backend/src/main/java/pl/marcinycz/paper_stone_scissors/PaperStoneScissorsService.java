@@ -4,19 +4,22 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.jdbc.core.JdbcTemplate;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
 public class PaperStoneScissorsService {
-
     @Autowired
     PaperStoneScissorsRepository pssRepository;
 
     @Autowired
     ObjectMapper objectMapper;
+
+    @Autowired
+    JdbcTemplate jdbcTemplate;
 
     //Start single game
     @CrossOrigin(origins = "http://localhost:3000/")
@@ -30,9 +33,7 @@ public class PaperStoneScissorsService {
         }
 
         pss.startPaperStoneScissorsGame(lastTotalScore);
-
         pssRepository.save(pss);
-
 
         return ResponseEntity.ok(pss);
     }
@@ -41,7 +42,6 @@ public class PaperStoneScissorsService {
     @CrossOrigin(origins = "http://localhost:3000/")
     @DeleteMapping("/pssDeleteHitory")
     public ResponseEntity pssDeleteAllHistory(){
-
         pssRepository.deleteAll();
 
         return ResponseEntity.ok("Deleted all database");
@@ -51,27 +51,9 @@ public class PaperStoneScissorsService {
     @CrossOrigin(origins = "http://localhost:3000/")
     @GetMapping("/pssLastGames")
     public ResponseEntity getLastGames() throws JsonProcessingException {
-        List<PaperStoneScissors> lastGames = new ArrayList<>();
-        List<PaperStoneScissors> allGames = pssRepository.findAll();
-
-        //How long history
-        int howLong = 5;
-
-        int lastGameLength = howLong;
-        int allGamesLength = allGames.toArray().length;
-
-        if(allGamesLength <  howLong){
-            lastGameLength = allGamesLength;
-        }
-
-        //Last index
-        allGamesLength -= 1;
-
-        for (int i = 0; i < lastGameLength; i++){
-            lastGames.add(i, allGames.get(allGamesLength));
-            allGamesLength --;
-        }
-        return ResponseEntity.ok(objectMapper.writeValueAsString(lastGames));
+        return ResponseEntity.ok(objectMapper.writeValueAsString(jdbcTemplate
+                .query("SELECT id, myChoiceInt, computerChoice, myChoice, score, verdict, totalScore FROM pss ORDER BY id DESC LIMIT 0,5",
+                BeanPropertyRowMapper.newInstance(PaperStoneScissors.class))));
     }
 
     //Game all history
@@ -80,6 +62,5 @@ public class PaperStoneScissorsService {
     public ResponseEntity getAllGames() throws JsonProcessingException {
         List<PaperStoneScissors> allGames = pssRepository.findAll();
         return ResponseEntity.ok(objectMapper.writeValueAsString(allGames));
-        //return (ResponseEntity) pssRepository.getAll();
     }
 }
