@@ -1,8 +1,13 @@
 import React, {Component} from 'react';
 import './App.css';
-import { Form, ToggleButtonGroup } from 'react-bootstrap';
+import { Form } from 'react-bootstrap';
 import { Button } from 'react-bootstrap';
-import ToggleButton from 'react-bootstrap/ToggleButton'
+import { Navbar } from 'react-bootstrap';
+import { Nav } from 'react-bootstrap';
+import { Container } from 'react-bootstrap';
+import Badge from 'react-bootstrap/Badge'
+
+
 
 import './PssGame.css'
 import GameAlert from './GameAlert';
@@ -33,7 +38,7 @@ class PssGame extends Component{
     }
     
     sendMyChoiceInt(myChoiceInt){
-        fetch('http://localhost:8080/pss', {
+        fetch('http://localhost:8080/prs', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -72,7 +77,7 @@ class PssGame extends Component{
     }
 
     getLastHistory(){
-        fetch('http://localhost:8080/pssLastGames', {
+        fetch('http://localhost:8080/prsLastGames', {
             method: 'GET',
             headers: {
                 'Accept': 'application/json',
@@ -114,7 +119,7 @@ class PssGame extends Component{
     }
 
     deleteHistory(){
-        fetch('http://localhost:8080/pssDeleteHitory', {
+        fetch('http://localhost:8080/prsDeleteHitory', {
             method: 'DELETE',
             headers: {
                 'Accept': 'application/json',
@@ -160,20 +165,38 @@ class PssGame extends Component{
   render() {
     return (
     <>
-    <div className='PssGame' >
+    <div >
+        <Navbar  bg="dark" variant="dark">
+            <Container>
+                <Navbar.Brand className="m-auto" href="#home">
+                        PAPER ROCK SCISSORS
+                </Navbar.Brand>
+                <Nav className="m-auto">
+                    <Nav.Link href="">Home</Nav.Link>
+                    <Nav.Link onClick={this.handleDeleteSumbit}>New game</Nav.Link>
+                </Nav>
+            </Container>
+        </Navbar>
+    </div>
 
+    <div className='PssGame' >
+        <Form>
+        <h3>
+            <Badge pill bg="warning" text="dark" size="lg" margin="20px">
+                THE CHOICE IS YOURS!
+            </Badge>{' '}
+        </h3>
+        </Form>
         <Form >
             <Form.Group controlId='myChoiceInt' size="lg">
                 <Button onClick={this.handleChoiceSumbit} size="lg" variant="primary" value={0}>Paper</Button>{' '}
-                <Button onClick={this.handleChoiceSumbit} size="lg" variant="secondary"   value={1}>Stone</Button>{' '}
+                <Button onClick={this.handleChoiceSumbit} size="lg" variant="secondary"   value={1}>Rock</Button>{' '}
                 <Button onClick={this.handleChoiceSumbit} size="lg" variant="success"   value={2}>Scissors</Button>{' '}
             </Form.Group>
         </Form>
 
-
         <GameAlert ref={this.gameAlert}/>
         <HistoryAlert ref={this.historyAlert}/>
-
 
         <Form onSubmit = {this.handleDeleteSumbit}>
             <Form.Group controlId='deleteHistory' size="lg">

@@ -56,7 +56,7 @@ class HistoryAlert extends Component{
         return (
           <>
           <div className="HistoryAlert">
-            <Alert variant={this.state.variant} onClose={() => this.setState({visible: false})} dismissible>
+            <Alert variant={this.state.variant} onClose={() => this.setState({visible: false})}>
                 <Alert.Heading>{this.state.heading}</Alert.Heading>
                  <p>
                     {this.state.message0}
