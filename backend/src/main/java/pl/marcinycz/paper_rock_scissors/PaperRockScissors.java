@@ -1,20 +1,20 @@
-package pl.marcinycz.paper_stone_scissors;
+package pl.marcinycz.paper_rock_scissors;
 
 import lombok.*;
 
 import javax.persistence.*;
 import java.util.Random;
 
-import static pl.marcinycz.paper_stone_scissors.ChoicePSS.*;
+import static pl.marcinycz.paper_rock_scissors.ChoicePRS.*;
 
 @Entity
-@Table(name = "pss")
+@Table(name = "prs")
 @Getter
 @Setter
 @AllArgsConstructor
 @ToString
 @NoArgsConstructor
-public class PaperStoneScissors {
+public class PaperRockScissors {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -28,7 +28,7 @@ public class PaperStoneScissors {
     private String verdict;
     private int totalScore;
 
-    public void startPaperStoneScissorsGame(int totalScore){
+    public void startPaperRockScissorsGame(int totalScore){
         this.totalScore = totalScore;
         int enemyChoice = enemyChoice();
         this.computerChoice = choiceName(enemyChoice);
@@ -41,7 +41,7 @@ public class PaperStoneScissors {
     public int judge (int myChoice, int computerChoice){
         if(computerChoice == myChoice){
             return 0;
-        }else if((myChoice == PAPER.value && computerChoice == STONE.value) || (myChoice == STONE.value && computerChoice == SCISSORS.value) || (myChoice == SCISSORS.value && computerChoice == PAPER.value)){
+        }else if((myChoice == PAPER.value && computerChoice == ROCK.value) || (myChoice == ROCK.value && computerChoice == SCISSORS.value) || (myChoice == SCISSORS.value && computerChoice == PAPER.value)){
             return 1;
         }else {
             return -1;
@@ -57,7 +57,7 @@ public class PaperStoneScissors {
         if(choice == 0){
             return "PAPER";
         }else if(choice == 1){
-            return "STONE";
+            return "ROCK";
         }else if(choice == 2) {
             return "SCISSORS";
         }else{
