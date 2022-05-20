@@ -43,13 +43,7 @@ class GameAlert extends Component{
           <div className="GameAlert">
             <Alert variant={this.state.variant} onClose={() => this.setState({visible: false})} >
                 <Alert.Heading>{this.state.heading}</Alert.Heading>
-                 <p>
                     {this.state.message}
-                </p>
-                <hr />
-                <p>
-                {this.state.message1}
-                </p>
             </Alert>
           </div>
           </>

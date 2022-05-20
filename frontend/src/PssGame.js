@@ -6,9 +6,6 @@ import { Navbar } from 'react-bootstrap';
 import { Nav } from 'react-bootstrap';
 import { Container } from 'react-bootstrap';
 import Badge from 'react-bootstrap/Badge'
-
-
-
 import './PssGame.css'
 import GameAlert from './GameAlert';
 import HistoryAlert from './HistoryAlert';
@@ -18,6 +15,7 @@ class PssGame extends Component{
     constructor(props){
         super(props);
         this.gameAlert = React.createRef();
+        this.gameAlertScore = React.createRef();
         this.historyAlert = React.createRef();
     }
 
@@ -54,13 +52,23 @@ class PssGame extends Component{
                     //pss.id, pss.myChoiceInt, pss.computerChoice, pss.myChoice, pss.score, pss.verdict, pss.totalScore
 
                      console.log("Add new game");
+
+                    if(pss.totalScore > 0){
+                        this.showGameAlertScore("success", pss.totalScore);
+                    } else if (pss.totalScore === 0){
+                        this.showGameAlertScore("warning", pss.totalScore);
+                    } else{
+                        this.showGameAlertScore("danger", pss.totalScore);
+                    }
+
+
                     
                      if(pss.score === 1){
-                        this.showGameAlert("success", pss.verdict, pss.myChoice +  " vs " + pss.computerChoice , "SCORE: " + pss.totalScore);
+                        this.showGameAlert("success", pss.verdict, pss.myChoice +  " vs " + pss.computerChoice);
                     } else if (pss.score === 0){
-                        this.showGameAlert("warning", pss.verdict, pss.myChoice +  " vs " + pss.computerChoice , "SCORE: " + pss.totalScore);
+                        this.showGameAlert("warning", pss.verdict, pss.myChoice +  " vs " + pss.computerChoice);
                     } else{
-                        this.showGameAlert("danger", pss.verdict, pss.myChoice +  " vs " + pss.computerChoice , "SCORE: " + pss.totalScore);
+                        this.showGameAlert("danger", pss.verdict, pss.myChoice +  " vs " + pss.computerChoice);
                     }
                     //Show history
                     this.getLastHistory();
@@ -131,6 +139,7 @@ class PssGame extends Component{
         }).then(function(response){
             if (response.status === 200){
                 console.log("Delete game history");
+                this.showGameAlertScore("warning", "SCORE");
                 this.showGameAlert("success", "Let's play", " ", "Deleted game history");
                 this.getLastHistory();
             } else{
@@ -150,6 +159,15 @@ class PssGame extends Component{
         this.gameAlert.current.setMessage1(message1);
         this.gameAlert.current.setVisible(true);
     }
+
+    showGameAlertScore(variant, heading, message, message1) {
+        this.gameAlertScore.current.setVariant(variant);
+        this.gameAlertScore.current.setHeading(heading);
+        this.gameAlertScore.current.setMessage(message);
+        this.gameAlertScore.current.setMessage1(message1);
+        this.gameAlertScore.current.setVisible(true);
+    }
+
 
     showHistoryAlert(variant, heading, message0, message1, message2, message3, message4) {
         this.historyAlert.current.setVariant(variant);
@@ -180,6 +198,7 @@ class PssGame extends Component{
     </div>
 
     <div className='PssGame' >
+        <GameAlert ref={this.gameAlertScore}/>
         <Form>
         <h3>
             <Badge pill bg="warning" text="dark" size="lg" margin="20px">
@@ -194,15 +213,17 @@ class PssGame extends Component{
                 <Button onClick={this.handleChoiceSumbit} size="lg" variant="success"   value={2}>Scissors</Button>{' '}
             </Form.Group>
         </Form>
+        <Form></Form>
 
         <GameAlert ref={this.gameAlert}/>
-        <HistoryAlert ref={this.historyAlert}/>
 
         <Form onSubmit = {this.handleDeleteSumbit}>
             <Form.Group controlId='deleteHistory' size="lg">
                 <Button size="lg" variant="danger" type="submit">Reset game</Button>{' '}
             </Form.Group>
         </Form>
+
+        <HistoryAlert ref={this.historyAlert}/>
     </div>
     </>
     )
