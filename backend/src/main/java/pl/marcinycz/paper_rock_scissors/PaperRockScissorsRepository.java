@@ -1,9 +1,35 @@
 package pl.marcinycz.paper_rock_scissors;
 
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 
 @Repository
-public interface PaperRockScissorsRepository extends JpaRepository <PaperRockScissors, Long> {
+public class PaperRockScissorsRepository {
+    @Autowired
+    JdbcTemplate jdbcTemplate;
+
+    public List<PaperRockScissors> getLastGame(int length){
+        return jdbcTemplate.query("SELECT id, myChoiceInt, idUser, computerChoice, myChoice, score, verdict, totalScore FROM prs ORDER BY id DESC LIMIT 0,?",
+                        BeanPropertyRowMapper.newInstance(PaperRockScissors.class), length);
+    }
+
+    public List<PaperRockScissors> getAll(){
+        return jdbcTemplate.query("SELECT id, myChoiceInt, idUser, computerChoice, myChoice, score, verdict, totalScore FROM prs",
+                BeanPropertyRowMapper.newInstance(PaperRockScissors.class));
+    }
+
+    public void save(PaperRockScissors paperRockScissors){
+        jdbcTemplate.update("INSERT INTO prs(id, myChoiceInt, idUser, computerChoice, myChoice, score, verdict, totalScore) VALUES(?, ?, ?, ?, ?, ?, ?, ?)",
+                paperRockScissors.getId(), paperRockScissors.getMyChoiceInt(), paperRockScissors.getIdUser(), paperRockScissors.getComputerChoice(),
+                paperRockScissors.getMyChoice(), paperRockScissors.getScore(), paperRockScissors.getVerdict(), paperRockScissors.getTotalScore()
+                );
+    }
+
+    public void deleteAll(){
+        jdbcTemplate.update("DELETE FROM prs");
+    }
 }

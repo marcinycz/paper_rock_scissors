@@ -22,6 +22,7 @@ public class PaperRockScissors {
     @NonNull
     private int myChoiceInt;
 
+    private int idUser;
     private String computerChoice;
     private String myChoice;
     private int score;
