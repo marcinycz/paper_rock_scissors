@@ -1,9 +1,9 @@
-.PssGame{
+.PaperRockScissors{
     margin: auto;
     padding: 10px;
 }
 
-.PssGame Form {
+.PaperRockScissors Form {
 
     margin: auto;
     display: flex;

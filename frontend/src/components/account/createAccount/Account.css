@@ -1,0 +1,16 @@
+.Account{
+    margin: auto;
+    padding: 10px;
+}
+
+Form {
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+}
+
+Button {
+    margin: 10px;
+}
