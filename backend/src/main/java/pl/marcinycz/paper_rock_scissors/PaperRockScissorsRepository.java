@@ -17,9 +17,19 @@ public class PaperRockScissorsRepository {
                         BeanPropertyRowMapper.newInstance(PaperRockScissors.class), length);
     }
 
+    public List<PaperRockScissors> getLastGameByIdUser(int idUser, int length){
+        return jdbcTemplate.query("SELECT id, myChoiceInt, idUser, computerChoice, myChoice, score, verdict, totalScore FROM prs WHERE idUser=? ORDER BY id DESC LIMIT 0,?",
+                BeanPropertyRowMapper.newInstance(PaperRockScissors.class), idUser, length);
+    }
+
     public List<PaperRockScissors> getAll(){
         return jdbcTemplate.query("SELECT id, myChoiceInt, idUser, computerChoice, myChoice, score, verdict, totalScore FROM prs",
                 BeanPropertyRowMapper.newInstance(PaperRockScissors.class));
+    }
+
+    public List<PaperRockScissors> getAllByIdUser(int idUser){
+        return jdbcTemplate.query("SELECT id, myChoiceInt, idUser, computerChoice, myChoice, score, verdict, totalScore FROM prs WHERE idUser=?",
+                BeanPropertyRowMapper.newInstance(PaperRockScissors.class), idUser);
     }
 
     public void save(PaperRockScissors paperRockScissors){
@@ -31,5 +41,9 @@ public class PaperRockScissorsRepository {
 
     public void deleteAll(){
         jdbcTemplate.update("DELETE FROM prs");
+    }
+
+    public void deleteAllById(int id){
+        jdbcTemplate.update("DELETE FROM prs WHERE idUser=?", id);
     }
 }
