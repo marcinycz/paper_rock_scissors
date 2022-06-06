@@ -1,3 +1,5 @@
+<h2>Application in which we can play the popular game "paper rock scissors".<h2/>
+
 https://user-images.githubusercontent.com/79772379/172076126-701fa286-882b-4307-bc59-60ab3436231d.mp4
 
 https://user-images.githubusercontent.com/79772379/172076129-845d575f-2133-4ebf-8224-45ef28afbf30.mp4
