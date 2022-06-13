@@ -48,7 +48,7 @@ class CreateAccount extends Component{
             }
             else if(response.status === 417){
                 console.log("Not use space");
-                this.showAlert("danger", "Not use space");
+                this.showAlert("danger", "Don't use space");
             } else{
                 console.log("Fail add user");
                 this.showAlert("danger", "Fail, did't add new user");

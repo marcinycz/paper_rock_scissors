@@ -188,7 +188,7 @@ class PaperRockScissors extends Component{
         }).then(function(response){
             if (response.status === 200){
                 console.log("Delete game history");
-                this.showGameAlertScore("warning", "SCORE");
+                this.showGameAlertScore("warning", "0");
                 this.showGameAlert("success", "Let's play", " ", "Deleted game history");
                 this.getLastHistory();
             } else{
